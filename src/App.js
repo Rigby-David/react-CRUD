@@ -12,6 +12,7 @@ import { logout } from './services/fetch-utils';
 import AuthPage from './AuthPage';
 import ListPage from './ListPage';
 import CreatePage from './CreatePage';
+import UpdatePage from './UpdatePage';
 
 export default function App() {
 
@@ -64,6 +65,9 @@ export default function App() {
         </Route>
         <Route exact path="/create">
           <CreatePage />
+        </Route>
+        <Route exact path="/books/:id">
+          <UpdatePage />
         </Route>
       </Switch>
     </Router>
