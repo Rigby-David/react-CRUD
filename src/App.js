@@ -35,9 +35,6 @@ export default function App() {
               <Link to="/books">Book List</Link>
             </li>
             <li>
-              <Link to="/books/1">Update a Book</Link>
-            </li>
-            <li>
               <Link to="/create">Add a Book</Link>
             </li>
 
