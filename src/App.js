@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { client } from './services/client';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom';
 
-function App() {
+import AuthPage from './AuthPage';
+
+export default function App() {
+
+  const [user, setUser] = useState(client.auth.user());
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Sign in</Link>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </nav>
+      </div>
+      <Switch>
+        <Route exact path="/">
+          {
+            !user
+              ? <AuthPage setUser={setUser}/>
+              : <Redirect to="/books" />
+          }
+        </Route>
+        <Route>
+        </Route>
+        <Route>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;

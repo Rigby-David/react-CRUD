@@ -20,9 +20,14 @@ Close the demo code and return to step 4 with new knowledge.
 
 5. Set up the Auth Page forms
 6. Set up the submit handler to sign in/sign up
+    <!-- async function handleSignInSubmit(e) { e.preventDefault() const user = await signIn setUser(user)} -->
 --- write a signUp function in our fetch utils that takes email and password as arguments
+    <!-- export async function signIn(email,password) { const {user,error} = await client.from.signIn({email: email, password: password})} -->
 --- pass email and password from state to signUp
+    <!-- const [signInEmail, setSignInEmail] = useState(''); -->
+    <!-- const [signInPassword, setSignInPassword] = useState(''); -->
 --- log out user to double check it worked
+
 7. protect our routes: if you are signed in, you shouldn't be allowed in the auth page. it should send you to the list page. Use a ternery in App.js. If there is a user in state, show the list page. If there is no user, show the auth page. The default state of user is client.auth.user(). That way if the user navigates to another page, losing state, we don't kick them back to auth when they return.
 8. we will put the user in App.js state. However, that data lives in a child (AuthPage). We need to pass setUser down to the authpage so that it can set parent state.
 9. We also add a logout button that conditionally renders in the header if there is a user in state.
@@ -51,7 +56,16 @@ Close the demo code and return to step 4 with new knowledge.
 
 Components:
 
-AuthPage.js - this comp. tracks user form state and allows users to sign up and sign in. It will take { setUser } from App.js
+### App.js
+
+---import AuthPage
+
+### AuthPage.js - this comp. tracks user form state and allows users to sign up and sign in. It will take { setUser } from App.js
+--- import useState and signIn/Up
+--- catch setUser (from app.js state) useState takes in client.auth.user()
+--- state and set--- signUpEmail, signInEmail, signUpPassword, signInPassword
+--- we'll need 2x <form onSubmit={handleSubmit}> with 4x <label> setState(e.target.value)}> (signIn/Up and 2x password) and 4x <input> onChange={() => setState(e.target.value)} and 2x <button> for sign in/up. handleSubmit for sign in/up async functions that will need to await sign in/up fetch functions from fetch-utils and set state
+
 
 CreatePage.js - tracks from state for item's fields. Uses controlled form inputs (value is linked to state)
     - on submit, create and item in supabase and redirect user to list page
@@ -61,5 +75,15 @@ ListPage.js - fetches and displays all items on load by using .map and the Item 
 UpdatePage.js - fetches and displays appropriate item on load. the useEffect dependency array should account for changes in the URl id param. on submit update the item. on load, preload the form
 
 fetch-utils.js - fetches data table and user table data from SB
+--- we can destructure our response with const { data, error } = await client.from
+---will need a fetch for
+createBook() -- 
+getBooks() -- get data from table, select all
+updateBook(book, id) -- get data from table, update book, match to id, select a single book
+deleteBook(id) -- get data from table, delete, match to id, select single
+getBookById(id) -- data from table, select all, match to id, select single
+signUp() -- client.auth.signUp ({ email: email, password: password })
+signIn(), and
+logout() -- client.auth.signOut()
 
 Item - renders a single item with r-r-d Link that takes the user to the item's UpdatePage
