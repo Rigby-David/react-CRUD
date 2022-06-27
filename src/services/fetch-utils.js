@@ -16,7 +16,7 @@ export async function signUp(email, password) {
 }
 
 export async function logout() {
-  const data = await client.auth.logout();
+  const { error } = await client.auth.signOut();
 }
 
 export async function createBook(book) {

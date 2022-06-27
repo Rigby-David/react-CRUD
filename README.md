@@ -87,3 +87,5 @@ signIn(), and
 logout() -- client.auth.signOut()
 
 Item - renders a single item with r-r-d Link that takes the user to the item's UpdatePage
+
+<button>logout</button> await client.auth.signOut();

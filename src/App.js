@@ -8,11 +8,19 @@ import {
   Redirect
 } from 'react-router-dom';
 
+import { logout } from './services/fetch-utils';
 import AuthPage from './AuthPage';
+import ListPage from './ListPage';
+import CreatePage from './CreatePage';
 
 export default function App() {
 
   const [user, setUser] = useState(client.auth.user());
+
+  async function handleLogout() {
+    await logout();
+    setUser('');
+  }
 
   return (
     <Router>
@@ -22,10 +30,20 @@ export default function App() {
             <li>
               <Link to="/">Sign in</Link>
             </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>
+              <Link to="/books">Book List</Link>
+            </li>
+            <li>
+              <Link to="/books/1">Update a Book</Link>
+            </li>
+            <li>
+              <Link to="/create">Add a Book</Link>
+            </li>
+
+            <li>
+              {user &&
+              <button onClick={handleLogout}>Logout</button>}
+            </li>
           </ul>
         </nav>
       </div>
@@ -37,9 +55,15 @@ export default function App() {
               : <Redirect to="/books" />
           }
         </Route>
-        <Route>
+        <Route exact path="/books">
+          {
+            user
+              ? <ListPage />
+              : <Redirect to="/" />
+          }
         </Route>
-        <Route>
+        <Route exact path="/create">
+          <CreatePage />
         </Route>
       </Switch>
     </Router>

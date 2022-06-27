@@ -16,7 +16,9 @@ export default function ListPage() {
 
   return (
     <div>
-      books.map((book, i) => <Book book={book} key={book.author + i + book.title} />)
+      {
+        books.map((book, i) => <Book book={book} key={book.author + i + book.title} />)
+      }
     </div>
   );
 }
