@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Book from './Book';
+import { Book } from './Book';
 import { getBooks } from './services/fetch-utils';
 
 export default function ListPage() {
