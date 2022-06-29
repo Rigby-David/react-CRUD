@@ -1,6 +1,6 @@
 import './App.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,6 +13,9 @@ import ListPage from './ListPage';
 import UpdatePage from './UpdatePage';
 
 export default function App() {
+
+  const [user, setUser] = useState();
+
   return (
     <Router>
       <div>
@@ -40,6 +43,10 @@ export default function App() {
             <CreatePage />
           </Route>
           <Route exact path="/">
+            {
+              !user 
+              ? 
+            }
             <AuthPage />
           </Route>
           <Route exact path="/discs">
